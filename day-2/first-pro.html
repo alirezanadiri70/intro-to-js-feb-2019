@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+
+  // x + y = answer
+
+  // need a variable to hold x;
+  let x = 0;
+  // need a variable to hold y;
+  let y = 0;
+  // need a variable to hold answer;
+  let answer = 0;
+  // need a field to collect input for x;
+  const inputX = document.createElement('input');
+  document.body.appendChild(inputX);
+  inputX.placeholder = 'Enter X Value';
+  inputX.type = 'number';
+  // need a field to collect input for y;
+  const inputY = document.createElement('input');
+  document.body.appendChild(inputY);
+  inputY.placeholder = 'Enter Y Value';
+  inputY.type = 'number';
+  const button = document.createElement('button');
+  document.body.appendChild(button);
+  button.innerText = 'Calculate';
+  button.addEventListener('click', addNumbers);
+  // need a function to ad the variables;
+  function addNumbers() {
+    // need to assign the answer variable;
+    x = Number(inputX.value);
+    y = Number(inputY.value);
+    answer = x + y;
+    // need to tell the user the answer;
+    const el = document.createElement('span');
+    document.body.appendChild(el);
+    el.innerText = answer;
+  }
+
+
+
+
+</script>
+
+
+</body>
+</html>
