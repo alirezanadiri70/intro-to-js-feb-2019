@@ -22,17 +22,18 @@
         const body = document.body
         const container = document.createElement('div');
         document.body.appendChild(container);
-        constainer.style.width = '720px';
+        container.style.width = '800px';
         container.style.height = (weeks * 100 )+ 'px';
         body.style.display = 'flex';
         body.style.justifyContent = 'center';
         const today = new Date().getMonth();
         const firstDay = new Date(`${today + 1}/01/${new Date().getFullYear()}`).getDay();
-        const nexttDay = new Date(`${today + 1 + 1}/01/${new Date().getFullYear()}`);
+        const nextMonth = new Date(`${today + 1 + 1}/01/${new Date().getFullYear()}`);
         nextMonth.setDate (nextMonth.getDate()-1);
         const lastDay = nextMonth.getDate();
         let dayNumber = 0;
         console.log(firstDay,'first day');
+        
         for(let i = 0; i < weeks * days; i++){
             const day = document.createElement('div');
             if(i >= firstDay && dayNumber < lastDay){
@@ -51,10 +52,10 @@
             day.style.height = '100px';
             day.style.width = '100px';
             document.body.appendChild(day);
-            daysArray[i] = {};
+            dayArray[i] = day;
 
         }
-        console.log('days',daysArray);
+        console.log('days',dayArray);
     
     
     </script>
