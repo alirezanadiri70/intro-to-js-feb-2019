@@ -20,3 +20,10 @@ const daysOweek = ['sun','mon','tue','wed','thu','fri','sat'];
 body.style.padding= '1em';
 const container = document.createElement('div');
 body.appendChild(container);
+container.style.width = '720px';
+container.style.height = (week * 100) + 'px';
+container.style.display = 'flex';
+body.style.flexDirection = 'column';
+body.style.alignItems = 'center';
+const today = new Date().getMonth();
+const firstDay = 
