@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <style>
+        select {
+            margin: .5em;
+        }
+    </style>
+</head>
+<body>
+<div style="display: flex">
+    <div style="flex: 1">
+        <h1>Survey</h1>
+        <h3>How much js do you really know?</h3>
+        <h4>On a scale of 0 through 4 how comfortable are you with these?</h4>
+        <h4>0: I never heard of it </h4>
+        <h4>1: I heard of it never used it </h4>
+        <h4>2: I tried to use it didn't work out</h4>
+        <h4>3: I used it and made it work</h4>
+        <h4>4: I used it and I understand it</h4>
+    </div>
+
+
+
+</div>
+<div id="relocate" style="flex: 1; justify-content: center; align-items: center">
+    <textarea name="" id="textA" cols="60" rows="12"></textarea>
+    Copy or &nbsp;
+    <a href="javascript:void(0)" download="data.txt">
+        Download Text
+    </a>
+</div>
+
+
+
+<script>
+    const body = document.body;
+    const questions = [
+        'Can you create a variable?',
+        'Do you know javascript data types?',
+        'Can you add numbers in variables?',
+        'Can you compare numbers in variables, greater, less, equal?',
+        'Can you make an element?',
+        'Can you place an element on the page?',
+        'Can you target a single element that is already on a page?',
+        'can you target all element that match on a page?',
+        'can you change an elements css properties?',
+        'can you loop over an array?',
+        'can you select a specific item in an array?',
+        'can you tell your code to wait with a set timeout?',
+        'can you tell your code to repeat after time with set interval',
+        'can you request an animation frame, recursively?'
+    ];
+    const answers = [0,1,2,3,4];
+
+    questions.forEach( (q, index) => {
+        const qWrapper = document.createElement('div');
+        const question = document.createTextNode(q);
+        qWrapper.appendChild(question);
+        body.appendChild(qWrapper);
+        const select = document.createElement('select');
+        select.addEventListener('change', updateDownloadHref);
+        select.question = q;
+        body.appendChild(select);
+        const blank = document.createElement('option');
+        blank.value = -1;
+        select.appendChild(blank);
+        blank.innerText = 'please choose an answer';
+        for (let i = 0; i < answers.length; i++) {
+          const option = document.createElement('option');
+          select.appendChild(option);
+          option.innerText = i.toString();
+          option.value = i;
+        }
+
+    });
+    var download = document.querySelector( "a[ download ]" );
+    var downloadUrl = null;
+    function updateDownloadHref() {
+
+        const obj = {};
+        const allSelects = document.querySelectorAll('select');
+        console.log('all selects', allSelects);
+        allSelects.forEach(q => {
+            obj[q.question] = q.value;
+        });
+        console.log('obj',obj);
+        const text = JSON.stringify(obj);
+
+        // Create a binary representation of the plain-text input.
+        var blob = new Blob(
+            [ text ], // Blob parts.
+            {
+                type : "text/plain;charset=utf-8"
+            }
+        );
+
+        // When we create Object URLs, the browser will keep them in memory until the
+        // document is unloaded or until the URL is explicitly released. Since we are
+        // going to create a new URL every time the user hits a key-stroke (in this
+        // particular demo), we need to be sure to release the previous Object URL
+        // before we create the new one.
+        if ( downloadUrl ) {
+
+            URL.revokeObjectURL( downloadUrl );
+
+        }
+
+        // Create an addressable version of the blob.
+        // --
+        // CAUTION: At this point, the URL has been allocated and the blob will be
+        // kept in the document memory space until the document is unloaded or the
+        // URL is explicitly released (see above).
+        downloadUrl = URL.createObjectURL( blob );
+
+        // Tie the addressable version of the blob to the download link.
+        download.setAttribute( "href", downloadUrl );
+
+        console.group( "Object URL" );
+        console.log( "URL:", downloadUrl );
+        console.groupEnd();
+        document.querySelector('#textA').value = text;
+
+    }
+    updateDownloadHref();
+    body.appendChild(document.querySelector('#relocate'))
+</script>
+
+
+</body>
+</html>

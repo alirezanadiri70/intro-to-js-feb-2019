@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // x + y = answer
+
+    // we need a variable to hold x;
+    let x = 0;
+    // we need a variable to hold y;
+    let y = 0;
+    // we need a variable to hold answer;
+    let answer = 0;
+    // we will need a field to collect input for x;
+    const inputX = document.createElement('input');
+    document.body.appendChild(inputX);
+    inputX.placeholder = 'enter x value';
+    inputX.type = 'number';
+    // we will need a field to collect input for y;
+    const inputY = document.createElement('input');
+    document.body.appendChild(inputY);
+    inputY.placeholder = 'enter y value';
+    inputY.type = 'number';
+    // we will need a button to tell the computer to do something
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+    button.innerText = '?';
+    button.addEventListener('click', addNumbers)
+    // we will need a function to add the variables
+    function addNumbers() {
+    // we will need to assign the answer variable
+        x = Number(inputX.value);
+        y = Number(inputY.value);
+        answer = x + y;
+
+        console.log(typeof x, typeof y);
+    // we need to tell the user the answer
+        const el = document.createElement('div');
+        document.body.appendChild(el);
+        el.innerText = answer;
+    }
+</script>
+
+</body>
+</html>

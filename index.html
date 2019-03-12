@@ -5,9 +5,10 @@
     <title>Intro to JS</title>
     <script src="./js/test.js"></script>
     <style>
-        body, html{
+        body, html {
             min-height: 100%;
         }
+
         h1 {
             text-align: center;
             display: inline-block;
@@ -25,39 +26,47 @@
             margin-bottom: 1em;
 
         }
+
         .main-holder > * {
-            box-shadow: 2px 4px 26px 5px rgba(0,0,0,0.75);
+            box-shadow: 2px 4px 26px 5px rgba(0, 0, 0, 0.75);
             width: 50%;
             padding: 1em;
             background-color: cornflowerblue;
             margin: .5em;
         }
 
-        .main-holder > * > ul{
+        .main-holder > * > ul {
             list-style: none;
         }
 
-        h4  {
+        h4 {
             margin: 2px;
         }
+
         li {
             margin: .3em;
         }
+
         .repo {
             color: cornflowerblue;
         }
+
         .left {
             transform: translateX(-50vw);
         }
+
         .right {
             transform: translateX(50vw);
         }
+
         .down {
             transform: translateY(100vh);
         }
+
         .move {
             transition: all .7s ease-in;
         }
+
         .top {
             transform: translateY(-10vh);
             color: black;
@@ -65,39 +74,60 @@
     </style>
 </head>
 <body>
-    <h1 class="top move">Intro to JS</h1>
-    <span class="repo">original repository: <span><a href="https://github.com/geekwisevinson/intro-to-js-feb-2019">intro-to-js-feb-2019</a></span></span>
-    <div class="main-holder">
-        <div class="left move">
-            <h2>What we have learned</h2>
-            <ul>
-                <li>
-                    <h4>Day1</h4>
-                    <ul>
-                        <li><a href="./1-what-we-learned/declaration.html">Declarations</a></li>
-                        <li><a href="./1-what-we-learned/basic-dom.html">Basic Dom</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="right move">
-            <h2>What we have built</h2>
-            <ul>
-                <li>
-                    <h4>Day 1</h4>
-                    <ul>
-                        <li>
-                            <a href="./day-1">button</a>
-                        </li>
-                        <li>
-                            <a href="./day-1/challenge/vinson.html">challenge</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+<h1 class="top move">Intro to JS</h1>
+<span class="repo">original repository: <span><a href="https://github.com/geekwisevinson/intro-to-js-feb-2019">intro-to-js-feb-2019</a></span></span>
+<div class="main-holder">
+    <div class="left move">
+        <h2>What we have learned</h2>
+        <ul>
+            <li>
+                <h4>Day1</h4>
+                <ul>
+                    <li><a href="./1-what-we-learned/declaration.html">Declarations</a></li>
+                    <li><a href="./1-what-we-learned/basic-dom.html">Basic Dom</a></li>
+                </ul>
+            </li>
+            <li>
+                <h4>Day2</h4>
+                <ul>
+                    <li><a href="./1-what-we-learned/git.html">Git</a></li>
+                </ul>
+            </li>
+            <li>
+                <h4>Day3</h4>
+                <ul>
+                    <li><a href="./1-what-we-learned/strings.html">Strings</a></li>
+                    <li><a href="./1-what-we-learned/numbers.html">Numbers</a></li>
+                    <li><a href="./1-what-we-learned/dates.html">Dates</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
-
+    <div class="right move">
+        <h2>What we have built</h2>
+        <ul>
+            <li>
+                <h4>Day 1</h4>
+                <ul>
+                    <li>
+                        <a href="./day-1">button</a>
+                    </li>
+                    <li>
+                        <a href="./day-1/challenge/vinson.html">challenge</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h4>Day 3</h4>
+                <ul>
+                    <li>
+                        <a href="./day-3/index.html">Calendar</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="main-holder">
     <div class="down move">
         <h3>External Resources</h3>
@@ -109,21 +139,22 @@
         <h3>Simple Thoughts</h3>
         <ul>
             <li><a href="./2-things-i-can-do/">What can I do as a programmer?</a></li>
+            <li><a href="./experiments/survey.html">Survey</a></li>
         </ul>
     </div>
 </div>
 
-    <script>
-        setTimeout(() => {
-            const allMoves = document.querySelectorAll('.move');
-            allMoves.forEach( item => {
-                item.classList.remove('left');
-                item.classList.remove('right');
-                item.classList.remove('down');
-                console.log('ran')
-            });
-            document.querySelector('h1').classList.remove('top')
-        }, 10)
-    </script>
+<script>
+    setTimeout(() => {
+        const allMoves = document.querySelectorAll('.move');
+        allMoves.forEach(item => {
+            item.classList.remove('left');
+            item.classList.remove('right');
+            item.classList.remove('down');
+            console.log('ran')
+        });
+        document.querySelector('h1').classList.remove('top')
+    }, 10)
+</script>
 </body>
 </html>

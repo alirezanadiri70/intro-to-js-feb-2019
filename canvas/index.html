@@ -17,12 +17,67 @@
     <canvas></canvas>
     <script>
       const canvas = document.querySelector('canvas');
+      const img = document.createElement('img');
+      img.src = 'img/sprite.png';
       console.dir(canvas)
       canvas.width = '500';
       canvas.height = '500';
 
       const context = canvas.getContext('2d');
-      context.
+      class Player {
+        x = null;
+        y = null;
+        w = null;
+        h = null;
+        sx = 361;
+        sy = 80;
+        sw = 80;
+        sh = 70;
+        constructor(x,y,w,h){
+          this.x = x;
+          this.y = y;
+          this.w = w;
+          this.h = h;
+        }
+
+        draw(){
+          context.drawImage(
+          img,
+           this.sx,this.sy,this.sw,this.sh,
+           this.x,this.y,this.w,this.h);
+         };
+       }
+       }
+
+      update(){
+        this.y++;
+        if (this.y > 500){
+          this.y = 0;
+        }
+      }
+      let y = 0;
+      const bird = new Player(100,100,80,70);
+      const bird2 =new Player
+      console.log(bird);
+    
+      function gameLoop(){
+        context.clearRect(0,0,500,500);
+         y++;
+         
+        //  const dx = 20;
+        //  const dy = y;
+        //  const dw = 80;
+        //  const dh = 70;
+         context.fillStyle = 'blue';
+        //  context.fillRect(dx,dy,dw,dh);
+        bird.update();
+        bird.draw();
+        bird.y++;
+          window.requestAnimationFrame(gameLoop);
+      }
+      gameLoop();
+
+
     </script>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strings</title>
+    <style>
+        pre {
+            background-color: antiquewhite;
+            color: black;
+            display: inline;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>String Object</h1>
+<p>The String global object is a constructor for strings or a sequence of characters.</p>
+<p>There are two types of strings primitives that are made directly with quotes and strings that are made with the string object construction. (String('example'))</p>
+<ul>
+    <li>
+        <h2>built-in methods and properties</h2>
+        <ul>
+            <li>
+                <h3>length</h3>
+                <p>a property that returns how many characters a string has</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello'.length; returns 5;</pre>
+                </span>
+            </li>
+            <li>
+                <h3>includes</h3>
+                <p>a method that return a boolean of whether the string contains another string</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello'.contains('ell'); returns true;</pre>
+                </span>
+            </li>
+            <li>
+                <h3>indexOf</h3>
+                <p>A method that returns what index the string contains another string</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello'.indexOf('ell'); returns 1;</pre>
+                </span>
+            </li>
+            <li>
+                <h3>replace</h3>
+                <p>A method that returns the string with a substring replaces with another string</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello again'.replace('hello', 'goodbye'); returns 'goodbye again'.</pre>
+                </span>
+            </li>
+            <li>
+                <h3>split</h3>
+                <p>returns an array of strings that are split by a given delimiter</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello again'.split(' '); returns ['hello','again']</pre>
+                </span>
+            </li>
+            <li>
+                <h3>substring</h3>
+                <p>returns a string from the string starting and ending at given indexes</p>
+                <h4>example</h4>
+                <span>
+                    <pre>'hello again'.substring(6,11); returns 'again'</pre>
+                </span>
+            </li>
+            <li>
+                <h3>trim</h3>
+                <p>returns a string from the string with the white space removed from each side</p>
+                <h4>example</h4>
+                <span>
+                    <pre>' hello again '.trim(); returns 'hello again'</pre>
+                </span>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dates</title>
+    <style>
+        pre {
+            background-color: antiquewhite;
+            color: black;
+            display: inline;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Date Object</h1>
+<p>The date object constructor will produce a date instance</p>
+<p>a date instance is an object with properties and methods that contain information about the date.</p>
+<ul>
+    <li>
+        <h2>built-in methods and properties</h2>
+        <ul>
+            <li>
+                <h3>getDate</h3>
+                <p>Returns the day of the month (1-31) for the specified date according to local time</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().getDate(); returns 5;</pre>
+                </span>
+            </li>
+            <li>
+                <h3>getDay</h3>
+                <p>Returns the day of the week (0-6) for the specified date according to local time</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().getDay(); returns 6;</pre>
+                </span>
+            </li>
+            <li>
+                <h3>getFullYear</h3>
+                <p>Returns the year (4 digits for 4-digit years) of the specified date according to local time.</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().getFullYear(); returns '2019'</pre>
+                </span>
+            </li>
+            <li>
+                <h3>getHours</h3>
+                <p>Returns the hour (0-23) in the specified date according to local time.</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().getHours(); returns 10</pre>
+                </span>
+            </li>
+            <li>
+                <h3>setDate</h3>
+                <p>Sets the day of the month for a specified date according to local time.</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().setDate(15); changes the date objects getDate() value</pre>
+                </span>
+            </li>
+            <li>
+                <h3>setHours</h3>
+                <p>Sets the hours for a specified date according to local time.</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().setHours(15); changes the date objects getHours() value</pre>
+                </span>
+            </li>
+            <li>
+                <h3>toLocaleString</h3>
+                <p>Returns a string with a locality sensitive representation of this date.</p>
+                <h4>example</h4>
+                <span>
+                    <pre>new Date().toLocaleString(); returns '03/05/2019'</pre>
+                </span>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

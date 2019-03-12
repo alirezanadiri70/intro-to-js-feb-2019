@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Master</title>
+    <script src="lib/codemirror.js"></script>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script type="text/javascript" src="mode/xml/xml.js"></script>
+    <script type="text/javascript" src="mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="mode/javascript/javascript.js"></script>
+    <script src="http://codemirror.net/addon/hint/show-hint.js"></script>
+    <script src="http://codemirror.net/addon/hint/javascript-hint.js"></script>
+    <script src="http://codemirror.net/addon/hint/xml-hint.js"></script>
+    <script src="http://codemirror.net/addon/hint/html-hint.js"></script>
+    <script src="https://unpkg.com/esprima@~4.0/dist/esprima.js"></script>
+</head>
+<body>
+
+<script src="./sequence/sequence.js"></script>
+<style>
+    html, body {
+        height: 100%;
+        background-color: moccasin;
+        overflow: hidden;
+    }
+
+    body * {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        height: 100%;
+    }
+
+    .view {
+        background-color: whitesmoke;
+        display: grid;
+        grid-template-columns: 300px auto;
+    }
+
+    .controls {
+        background-color: red;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .controls button {
+        flex: 1;
+    }
+
+    .instructions {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: .4em;
+    }
+
+    .instructions p {
+        margin: .5em;
+    }
+
+    .instructions-text {
+        padding-top: .5em;
+        padding-bottom: .5em;
+        background-color: darkblue;
+    }
+
+    .instructions-area {
+        padding: .5em;
+        background-color: darkslategrey;
+    }
+
+    .instructions .instructions-text span {
+        background: moccasin;
+        color: green;
+        padding: 0 .2em;
+    }
+
+    .next { background-color: lightgreen}
+    .reset {background-color: lightcoral}
+
+
+    .magic {
+        font-family: 'Magic', Arial, sans-serif;
+        font-size: 1.7em;
+    }
+    @font-face {
+        font-family: "Magic";
+        src: url("./dungeon.ttf");
+    }
+</style>
+<main>
+    <div>Press Next to Continue</div>
+    <div class="view">
+        <div class="instructions">
+            <div class="instructions-text">
+            </div>
+            <div class="instructions-error">
+            </div>
+            <div class="instructions-guide">
+            </div>
+        </div>
+        <div id="world">
+        </div>
+    </div>
+    <div class="controls">
+        <!--<div id="html">-->
+        <!--HTML-->
+        <!--</div>-->
+        <div style="display: flex; ">
+            <button class="next" onclick="run()">Next</button>
+            <button class="reset" onclick="resetHtml()">Reset</button>
+        </div>
+        <div id="javascript">
+            JavaScript
+        </div>
+    </div>
+</main>
+<script>
+    // const html1 = createCM(document.querySelector('#html'), 'html', 'html1');
+    const js1 = createCM(document.querySelector('#javascript'), 'js', 'js1');
+    const world = document.querySelector('#world');
+    // html1.on('keyup', this.changeDetectedCm);
+    // html1.on('mousedown', this.mouseDownDetectedCm);
+    js1.on('keyup', this.changeDetectedCm);
+    js1.on('mousedown', this.mouseDownDetectedCm);
+
+    function createCM(el, type, name) {
+        const htmlConfig = {
+            lineNumbers: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete"
+            },
+            mode: "text/html"
+        };
+        const jsConfig = {
+            lineNumbers: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete"
+            },
+            mode: {
+                name: "javascript",
+                globalVars: true
+            }
+        };
+        const cm = CodeMirror(el, type === 'html' ? htmlConfig : jsConfig);
+        cm.changeDetectedCm = changeDetectedCm;
+        cm.mouseDownDetectedCm = mouseDownDetectedCm;
+        cm.cmName = name;
+        return cm;
+    }
+
+    function changeDetectedCm(e, cm) {
+    }
+
+    function mouseDownDetectedCm(e, cm) {
+    }
+</script>
+<!--ready-->
+<script>
+    let skip = false;
+    let scene = true ? 0 : sequence.length -2;
+    let shouldTest = false;
+    const game = {
+        instructions: 'hello',
+    };
+    const instructions = document.querySelector('.instructions-text');
+
+    function gameLoop() {
+        handleScene();
+        window.requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+
+    function handleScene() {
+        if (sequence[scene].wait) {
+            if (sequence[scene].start) {
+                if (new Date() - sequence[scene].start > sequence[scene].wait || skip) {
+                    console.log('skip', skip);
+                    moveToNextScene()
+                } else {
+                }
+            } else {
+                sequence[scene].start = new Date();
+            }
+        } else if (sequence[scene].test) {
+            if (shouldTest === true) {
+                sequence[scene].test();
+                shouldTest = false;
+            }
+
+        }
+        handleInstructions();
+    }
+
+    function handleInstructions() {
+        instructions.innerHTML = sequence[scene].instructions;
+    }
+
+    function moveToNextScene() {
+        sequence[scene].start = null;
+        skip = false;
+        document.querySelector('.instructions-error').innerHTML = ``;
+        scene++;
+        if (scene >= sequence.length) {
+            scene = 0;
+        }
+        if (sequence[scene].load) {
+            sequence[scene].load();
+        }
+        if (sequence[scene].startingHTML) {
+            document.getElementById('world').innerHTML = sequence[scene].startingHTML;
+        } else {
+            sequence[scene].startingHTML = document.getElementById('world').innerHTML;
+        }
+        js1.setValue('');
+        js1.focus()
+    }
+
+    function resetHtml() {
+        if (sequence[scene].startingHTML) {
+            document.getElementById('world').innerHTML = sequence[scene].startingHTML;
+        } else {
+            document.getElementById('world').innerHTML = '';
+        }
+    }
+
+    function run() {
+        shouldTest = true;
+    }
+
+    function test() {
+        let str = js1.getValue();
+        const mapObj = {
+            'const ': 'window.',
+            'let ': "window.",
+            'var ': "window."
+        };
+        // str = str.replace(/\s/g, '');
+        str = str.replace('document.body', 'document.getElementById(`world`)');
+        str = str.replace(/const\s|let\s|var\s/gi, function (matched) {
+            return mapObj[matched];
+        });
+        console.log('script', str);
+        try {
+            console.log(str, this.last)
+            if (str === this.last) {
+                return
+            }
+            console.log('ran');
+            this.last = str;
+            eval(str);
+            var result = esprima.parse(str);
+            console.log('result', result);
+            var vars = result.body.map(v => {
+                console.log(v.expression);
+                if (!v.expression || v.expression && !v.expression.left) {
+                    return null;
+                }
+                return [v.kind, v.expression.left.property? v.expression.left.property.name : v.expression.left.name]
+            });
+            vars = vars.filter(i => i);
+            var testObj = {};
+            vars.forEach(v => {
+                testObj[v[1]] = window[v[1]];
+            });
+        } catch (e) {
+            console.log('error', e);
+        }
+        if (vars && this.answer) {
+            this.answer(testObj);
+        }
+    }
+
+    document.addEventListener('keyup', checkSkip);
+    function checkSkip(e) {
+        if (e.shiftKey && e.code === 'Enter') {
+            skip = true;
+            run();
+        }
+    }
+    sequence.forEach( s => {
+        s.answer ? s.test = test : void(null);
+    })
+</script>
+</body>
+</html>

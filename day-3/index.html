@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <style>
+        div {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: darkslategrey;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const body = document.body;
+    const date = new Date();  // 2009-11-10
+    const month = date.toLocaleString('en-us', { month: 'long' });
+    const h1 = document.createElement('h1');
+    h1.style.color = 'lime';
+    h1.innerText = month;
+    h1.style[`text-shadow`] = `3px 2px 3px black`;
+    body.appendChild(h1);
+    // how many weeks to display;
+    const weeks = 6;
+    // how many days in a week;
+    const days = 7;
+    const daysArray = [];
+    const daysOWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    body.style.padding = '1em';
+    const container = document.createElement('div');
+    body.appendChild(container);
+    container.style.width = '720px';
+    container.style.height = (weeks * 100) + 'px';
+    body.style.display = 'flex';
+    body.style.flexDirection = 'column';
+    body.style.alignItems = 'center';
+    const today = new Date().getMonth();
+    const firstDay = new Date(`${today + 1}/01/${new Date().getFullYear()}`).getDay();
+    const nextMonth = new Date(`${today + 1 + 1}/01/${new Date().getFullYear()}`);
+    nextMonth.setDate( nextMonth.getDate() -1);
+    const lastDay = nextMonth.getDate();
+    let dayNumber = 0;
+    console.log(firstDay, 'first day');
+    console.log('last day', lastDay);
+    for (let i = 0; i < days; i++) {
+        const day = document.createElement('div');
+        day.style.textAlign = 'center';
+        if ( i === new Date().getDay()) {
+            day.style.backgroundColor = 'lime';
+        } else {
+            day.style.backgroundColor = 'green';
+        }
+        day.innerText = daysOWeek[i];
+        day.style.display = 'inline-block';
+        day.style.border = '1px solid black';
+        day.style.padding = '.2em';
+        day.style.width = '100px';
+        container.appendChild(day);
+    }
+    for (let i = 0; i < weeks * days; i++) {
+        const day = document.createElement('div');
+        day.style.backgroundColor = 'grey';
+        day.style.color = 'black';
+        day.style.fontSize = '2em';
+        day.style.padding = '.2em';
+        if (i >= firstDay && dayNumber < lastDay) {
+            dayNumber++;
+            day.innerText = dayNumber;
+            day.style.backgroundColor = 'olive';
+            if (dayNumber === new Date().getDate()) {
+                day.style.backgroundColor = 'lime';
+                day.style.color = 'white';
+                day.style[`text-shadow`] = `3px 2px 3px #1C6EA4`;
+            }
+        } else {
+            day.innerText = 'x';
+            day.style.color = 'transparent';
+        }
+        day.style.display = 'inline-block';
+        day.style.border = '1px solid black';
+        day.style.height = '100px';
+        day.style.width = '100px';
+        container.appendChild(day);
+        daysArray[i] = day;
+    }
+</script>
+</body>
+</html>
