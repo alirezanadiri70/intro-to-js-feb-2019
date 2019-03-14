@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flappy</title>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        const height = 640;
+        const width = 360;
+        const canvas = document.querySelector('canvas');
+        canvas.style.border = '1px solid black';
+        canvas.height = height;
+        canvas.width = width;
+        const img = document.createElement('img');
+        img.src = './sprite.png';
+        document.body.prepend(img);
+    </script>
+    <script src="player.js"></script>
+    <script src="background.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
