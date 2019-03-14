@@ -2,82 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Canvas</title>
     <style>
-      canvas {
-          border: 2px solid black;
-      }
-    
-    
+        canvas {
+            border: 2px solid black;
+        }
     </style>
 </head>
 <body>
     <canvas></canvas>
     <script>
-      const canvas = document.querySelector('canvas');
-      const img = document.createElement('img');
-      img.src = 'img/sprite.png';
-      console.dir(canvas)
-      canvas.width = '500';
-      canvas.height = '500';
+        const canvas = document.querySelector('canvas');
+        const img = document.createElement('img');
+        img.src = './sprite.png';
+        console.dir(canvas);
+        canvas.width = '500';
+        canvas.height = '500';
 
-      const context = canvas.getContext('2d');
-      class Player {
-        x = null;
-        y = null;
-        w = null;
-        h = null;
-        sx = 361;
-        sy = 80;
-        sw = 80;
-        sh = 70;
-        constructor(x,y,w,h){
-          this.x = x;
-          this.y = y;
-          this.w = w;
-          this.h = h;
+        const context = canvas.getContext('2d');
+
+        class Player {
+            x = null;
+            y = null;
+            w = null;
+            h = null;
+            sx = 361;
+            sy = 80;
+            sw = 80;
+            sh = 70;
+            constructor(x, y, w, h) {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                console.log('run once')
+            }
+
+            draw() {
+                context.drawImage(
+                    img,
+                    this.sx, this.sy, this.sw, this.sh,
+                    this.x, this.y, this.w, this.h
+                );
+            }
+
+            update() {
+                this.y++;
+                if( this.y > 500) {
+                    this.y = 0;
+                }
+                this.w++;
+                if (this.w > 200) {
+                    this.w = 20
+                }
+            }
         }
 
-        draw(){
-          context.drawImage(
-          img,
-           this.sx,this.sy,this.sw,this.sh,
-           this.x,this.y,this.w,this.h);
-         };
-       }
-       }
+        let y = 0;
+        const bird = new Player(100, 100, 80, 70);
+        const bird2 = new Player(300, 100, 160 , 140);
+        const bird3 = new Player(300, 100, 160 , 140);
 
-      update(){
-        this.y++;
-        if (this.y > 500){
-          this.y = 0;
+        console.log(bird);
+        function gameLoop() {
+            context.clearRect(0, 0, 500, 500);
+
+
+            context.fillStyle = 'blue';
+            // context.fillRect(dx, dy, dw, dh);
+            bird.update();
+            bird2.update();
+            bird.draw();
+            bird2.draw();
+
+            window.requestAnimationFrame(gameLoop)
         }
-      }
-      let y = 0;
-      const bird = new Player(100,100,80,70);
-      const bird2 =new Player
-      console.log(bird);
-    
-      function gameLoop(){
-        context.clearRect(0,0,500,500);
-         y++;
-         
-        //  const dx = 20;
-        //  const dy = y;
-        //  const dw = 80;
-        //  const dh = 70;
-         context.fillStyle = 'blue';
-        //  context.fillRect(dx,dy,dw,dh);
-        bird.update();
-        bird.draw();
-        bird.y++;
-          window.requestAnimationFrame(gameLoop);
-      }
-      gameLoop();
-
-
+        gameLoop();
     </script>
 </body>
 </html>
