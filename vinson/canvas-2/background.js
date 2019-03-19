@@ -26,8 +26,12 @@ class Bg {
 
     update() {
         this.x  -= 1;
-        if( this.x + this.w < 0) {
-            this.x = width;
+        if( this.x + width <= 0) {
+            console.log('frame', frame, this.x);
+            this.x = this.w -1;
+        }
+        if (this.x === 0) {
+            console.log('frame', frame, this.x);
         }
     }
 
