@@ -3,6 +3,16 @@ const player1 = new Player(0, 0, 100, 100, context);
 const bg = new Bg(0, 0, width, height, context);
 const bg2 = new Bg(width, 0, width, height, context);
 let frame = 0;
+
+
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        player1.moveUp();
+    }
+} );
+
+
 function gameLoop() {
     ++frame;
 

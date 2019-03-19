@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Storage</title>
+</head>
+<body>
+page 1
+<script>
+    window.localStorage.setItem('page', '1');
+    window.location.href = window.location.href.replace('index.html', './page-2.html');
+</script>
+</body>
+</html>
