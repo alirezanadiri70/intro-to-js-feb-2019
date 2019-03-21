@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="randomName()"> gen</button>
+
+
+    <script>
+    const nameList = ['DW','AN','JB','GO','WM'];
+   
+    let index = 0;
+    const called = [];
+
+
+    function randomName(){
+        index = Math.floor(Math.random() * nameList.length);
+        const answer = nameList[index];
+        nameList.splice(index,1)
+        
+        console.log(index);
+        console.log(answer);
+        console.log(nameList);
+    }
+   
+
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>
