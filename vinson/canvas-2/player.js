@@ -1,4 +1,4 @@
-console.log('player');
+
 
 class Player {
     x = 0;
@@ -31,6 +31,9 @@ class Player {
         );
     }
 
+
+    /// git fetch upstream
+    // git merge upstream/master
     update() {
         this.motion += 0.20;
         this.y += this.ySpeed + this.motion;
@@ -55,6 +58,8 @@ class Player {
     moveUp() {
         console.log('move up');
         this.motion = 0;
+        flapAudio.currentTime = 0;
+        flapAudio.play();
     }
 
 }

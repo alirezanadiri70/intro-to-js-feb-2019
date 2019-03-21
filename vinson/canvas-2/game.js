@@ -3,7 +3,8 @@ const player1 = new Player(0, 0, 100, 100, context);
 const bg = new Bg(0, 0, width, height, context);
 const bg2 = new Bg(width, 0, width, height, context);
 let frame = 0;
-
+const flapAudio = document.createElement('audio');
+flapAudio.src = './flap.mp3';
 
 
 document.addEventListener('keydown', (event) => {
